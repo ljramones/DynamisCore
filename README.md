@@ -45,7 +45,7 @@ public interface DynamisSubsystem {
 public record TickContext(long tickNumber, double deltaTime, double elapsedTime) {}
 ```
 
-**`InitContext`** — carries what a subsystem needs during initialization: access to DynamisContent, DynamisSession, and engine configuration. Passed once during startup.
+**`InitContext`** — carries initialization-time shared data from core. It currently contains engine configuration and is passed once during startup.
 
 ---
 

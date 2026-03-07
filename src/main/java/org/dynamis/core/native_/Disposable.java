@@ -1,7 +1,5 @@
 package org.dynamis.core.native_;
 
-import org.dynamis.core.logging.DynamisLogger;
-
 /**
  * Contract for resources that require explicit cleanup.
  */
@@ -25,8 +23,7 @@ public interface Disposable {
     try {
       dispose();
     } catch (Exception e) {
-      DynamisLogger.get(getClass())
-          .warn("Exception during dispose: " + e.getMessage(), e);
+      // Intentional no-op: callers opting into quiet disposal accept swallowed exceptions.
     }
   }
 }

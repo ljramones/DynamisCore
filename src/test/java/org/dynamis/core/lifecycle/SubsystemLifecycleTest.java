@@ -2,7 +2,6 @@ package org.dynamis.core.lifecycle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -47,14 +46,12 @@ class SubsystemLifecycleTest {
   }
 
   @Test
-  void initContextSimpleFactoryUsesNullProviders() {
+  void initContextFactoryCarriesConfig() {
     DynamisConfig config = DynamisConfig.builder().set("mode", "test").build();
 
     InitContext context = InitContext.of(config);
 
     assertEquals(config, context.config());
-    assertNull(context.contentProvider());
-    assertNull(context.sessionProvider());
   }
 
   @Test
