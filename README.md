@@ -11,6 +11,7 @@ DynamisCore has zero dependencies. It is the one component every other Dynamis c
 DynamisCore is intentionally small. The inclusion rule is strict: if two or more unrelated components need the same type and neither should own it, it belongs here. If only one component needs it, it stays in that component. Target size is 20–30 classes and interfaces total.
 
 Canonical contract reference: [docs/dynamiscore-final-contract.md](docs/dynamiscore-final-contract.md)
+The foundational DynamisCore contract is frozen at tag `dynamiscore-contract-1`.
 
 ---
 
