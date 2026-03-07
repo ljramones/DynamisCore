@@ -3,6 +3,8 @@
 ## Objective
 Determine whether DynamisCore is a minimal, stable foundation or trending into a junk drawer.
 
+Canonical contract reference: `docs/dynamiscore-final-contract.md`.
+
 ## Current Snapshot (2026-03-06)
 - Production types: 28 (`src/main/java/org/dynamis/core/**`)
 - Test classes: 8 (`src/test/java/org/dynamis/core/**`)

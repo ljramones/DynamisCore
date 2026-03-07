@@ -3,6 +3,8 @@
 ## Executive Answer
 DynamisCore is close to a minimal foundation, but it is showing early junk-drawer signals in a few boundary types. Fixing those now is low cost and high leverage.
 
+Canonical contract reference: `docs/dynamiscore-final-contract.md`.
+
 ## Status After Boundary-Hardening Slice
 - Resolved: `InitContext` no longer exposes untyped `Object` placeholders.
 - Resolved: `Disposable` no longer depends on logging (`DynamisLogger` import removed).
