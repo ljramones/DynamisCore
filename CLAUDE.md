@@ -25,7 +25,6 @@ Do not add:
 Single-module Maven project, package root: `org.dynamis.core`.
 
 ## Known Caveats
-- `SystemId.of(String)` derives IDs from `name.hashCode()`; IDs are deterministic but not guaranteed unique because hash collisions can occur.
 - Java does not allow `sealed` types with an empty `permits` list, and sealed hierarchies would also prevent event subtypes in other components/packages. `EngineEvent` is intentionally an open interface until concrete cross-component event ownership is finalized.
 - SpotBugs exclusion in `spotbugs-exclude.xml` suppresses `CT_CONSTRUCTOR_THROW` for `ResourceHandle`; constructor validation for non-zero handles is required by contract.
 
@@ -39,7 +38,7 @@ Single-module Maven project, package root: `org.dynamis.core`.
 ### `org.dynamis.core.entity`
 - `EntityId`: positive long wrapper for entity identity.
 - `ComponentId`: positive long wrapper for component identity.
-- `SystemId`: positive long wrapper for subsystem identity, including name-hash factory.
+- `SystemId`: positive long wrapper for subsystem identity.
 
 ### `org.dynamis.core.event`
 - `EngineEvent`: base marker interface for engine events with default priority and explicit creation-time timestamp contract.

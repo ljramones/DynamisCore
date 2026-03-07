@@ -69,19 +69,4 @@ class EntityIdentityTest {
     assertTrue(maybeEntity.isEmpty());
   }
 
-  @Test
-  void systemIdOfNameIsConsistent() {
-    assertEquals(SystemId.of("render"), SystemId.of("render"));
-  }
-
-  @Test
-  void systemIdOfNameRejectsNullAndEmpty() {
-    IllegalArgumentException nullName =
-        assertThrows(IllegalArgumentException.class, () -> SystemId.of((String) null));
-    assertEquals("System name must be non-null and non-empty", nullName.getMessage());
-
-    IllegalArgumentException emptyName =
-        assertThrows(IllegalArgumentException.class, () -> SystemId.of(""));
-    assertEquals("System name must be non-null and non-empty", emptyName.getMessage());
-  }
 }

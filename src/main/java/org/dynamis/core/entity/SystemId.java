@@ -19,21 +19,6 @@ public record SystemId(long id) implements Comparable<SystemId> {
     return new SystemId(id);
   }
 
-  /**
-   * Creates a deterministic {@link SystemId} from a system name.
-   *
-   * <p>Hash collisions are possible, so this is stable but not globally unique.
-   *
-   * @param name system name
-   * @return system id instance
-   */
-  public static SystemId of(String name) {
-    if (name == null || name.isEmpty()) {
-      throw new IllegalArgumentException("System name must be non-null and non-empty");
-    }
-    return of(Integer.toUnsignedLong(name.hashCode()));
-  }
-
   @Override
   public int compareTo(SystemId other) {
     return Long.compare(this.id, other.id);

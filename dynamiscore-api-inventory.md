@@ -18,12 +18,12 @@ Total public types: 27 (excluding `package-info`)
 ### `org.dynamis.core.entity`
 - `EntityId` (`record`, `Comparable`)
 - `ComponentId` (`record`, `Comparable`)
-- `SystemId` (`record`, `Comparable`, plus `of(String)`)
+- `SystemId` (`record`, `Comparable`)
 
 Assessment:
 - Belongs in core.
 - Sentinel removed: no built-in "no entity" value in `EntityId`; absence should be represented at usage boundaries.
-- Risk: hash-derived `SystemId.of(String)` can leak collision/policy semantics into all modules.
+- String-hash construction removed: system identity is explicit numeric ID only.
 
 ### `org.dynamis.core.lifecycle`
 - `DynamisSubsystem` (`initialize`, `tick`, `shutdown`, `subsystemName`)

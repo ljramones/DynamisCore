@@ -22,6 +22,8 @@ Absence of an entity is represented outside `EntityId` (for example, `Optional<E
 
 **`SystemId`** — identifies a registered subsystem within DynamisWorldEngine.
 
+`SystemId` values are explicit numeric identities in core; name-to-id derivation is owned outside this module.
+
 ```java
 EntityId player = EntityId.of(1L);
 EntityId npc    = EntityId.of(2L);
