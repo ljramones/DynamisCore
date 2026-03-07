@@ -15,7 +15,7 @@ Total public types: 27 (excluding `package-info`)
 
 ## Package Inventory
 
-### `org.dynamis.core.entity`
+### `org.dynamisengine.core.entity`
 - `EntityId` (`record`, `Comparable`)
 - `ComponentId` (`record`, `Comparable`)
 - `SystemId` (`record`, `Comparable`)
@@ -25,7 +25,7 @@ Assessment:
 - Sentinel removed: no built-in "no entity" value in `EntityId`; absence should be represented at usage boundaries.
 - String-hash construction removed: system identity is explicit numeric ID only.
 
-### `org.dynamis.core.lifecycle`
+### `org.dynamisengine.core.lifecycle`
 - `DynamisSubsystem` (`initialize`, `tick`, `shutdown`, `subsystemName`)
 - `TickContext` (`tickNumber`, `deltaTime`, `elapsedTime`)
 - `InitContext` (`DynamisConfig`)
@@ -35,7 +35,7 @@ Assessment:
 - Lifecycle contracts belong in core.
 - Boundary hardening applied: `InitContext` no longer carries untyped placeholders.
 
-### `org.dynamis.core.event`
+### `org.dynamisengine.core.event`
 - `EngineEvent` (default `priority`, explicit `timestamp` contract)
 - `EventListener<T>`
 - `EventPriority`
@@ -45,7 +45,7 @@ Assessment:
 - Base event contracts belong in core.
 - Timestamp semantics are explicit: event types must provide a stable creation-time timestamp.
 
-### `org.dynamis.core.config`
+### `org.dynamisengine.core.config`
 - `DynamisConfig` (+ nested `Builder`)
 - `MissingConfigKeyException`
 - `ConfigValueException`
@@ -54,7 +54,7 @@ Assessment:
 - Config contract belongs in core.
 - Risk: boolean parsing is permissive (`true` => true, everything else false), which can hide misconfiguration.
 
-### `org.dynamis.core.logging`
+### `org.dynamisengine.core.logging`
 - `DynamisLogger` (JUL-backed facade)
 - `LogLevel`
 - `LogRecord`
@@ -63,7 +63,7 @@ Assessment:
 - Logging abstraction can belong in core if it remains backend-agnostic.
 - Risk: hard dependency on JUL behavior in `DynamisLogger`; `LogRecord` clones `Throwable` on construction/access.
 
-### `org.dynamis.core.resource`
+### `org.dynamisengine.core.resource`
 - `Disposable` (includes `disposeQuietly`)
 - `AbstractDisposable`
 - `ResourceHandle`
@@ -74,7 +74,7 @@ Assessment:
 - Rename slice complete: package naming is now `resource`.
 - `ResourceHandle` and `AbstractDisposable` may be too implementation-heavy for strict core.
 
-### `org.dynamis.core.version`
+### `org.dynamisengine.core.version`
 - `Version`
 - `ComponentVersion`
 - `InvalidVersionException`

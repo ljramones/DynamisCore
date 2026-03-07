@@ -37,7 +37,7 @@ Interpretation:
 Current coordinates:
 - `groupId`: `org.dynamis`
 - `artifactId`: `dynamis-core`
-- Packages: `org.dynamis.core.*`
+- Packages: `org.dynamisengine.core.*`
 
 Target story discussed by project direction:
 - `org.dynamisengine` namespace
