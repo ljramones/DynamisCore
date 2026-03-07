@@ -63,6 +63,5 @@ DynamisCore is healthy if all are true:
   - Compile dependency footprint remains effectively zero external dependencies.
 - Next cleanup candidates:
   - permissive config boolean parsing behavior.
-  - `EntityId.NONE` sentinel policy.
   - `SystemId.of(String)` collision/policy semantics.
   - runtime-policy exceptions currently living in core.

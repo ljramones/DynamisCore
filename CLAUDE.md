@@ -37,7 +37,7 @@ Single-module Maven project, package root: `org.dynamis.core`.
 - `ConfigValueException`: thrown when a configuration value cannot be parsed to a requested type.
 
 ### `org.dynamis.core.entity`
-- `EntityId`: positive long wrapper for entity identity; includes `NONE` sentinel.
+- `EntityId`: positive long wrapper for entity identity.
 - `ComponentId`: positive long wrapper for component identity.
 - `SystemId`: positive long wrapper for subsystem identity, including name-hash factory.
 

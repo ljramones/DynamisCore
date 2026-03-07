@@ -1,9 +1,10 @@
 package org.dynamis.core.entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 class EntityIdentityTest {
@@ -63,9 +64,9 @@ class EntityIdentityTest {
   }
 
   @Test
-  void entityIdNoneSentinelExists() {
-    assertEquals(EntityId.of(Long.MAX_VALUE), EntityId.NONE);
-    assertNotEquals(EntityId.of(1L), EntityId.NONE);
+  void noEntityCanBeRepresentedByOptionalAbsence() {
+    Optional<EntityId> maybeEntity = Optional.empty();
+    assertTrue(maybeEntity.isEmpty());
   }
 
   @Test

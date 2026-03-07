@@ -22,7 +22,8 @@ Total public types: 27 (excluding `package-info`)
 
 Assessment:
 - Belongs in core.
-- Risk: sentinel (`EntityId.NONE`) and hash-derived `SystemId.of(String)` can leak policy/collision semantics into all modules.
+- Sentinel removed: no built-in "no entity" value in `EntityId`; absence should be represented at usage boundaries.
+- Risk: hash-derived `SystemId.of(String)` can leak collision/policy semantics into all modules.
 
 ### `org.dynamis.core.lifecycle`
 - `DynamisSubsystem` (`initialize`, `tick`, `shutdown`, `subsystemName`)

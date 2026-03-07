@@ -8,6 +8,7 @@ DynamisCore is close to a minimal foundation, but it is showing early junk-drawe
 - Resolved: `Disposable` no longer depends on logging (`DynamisLogger` import removed).
 - Resolved: resource package naming was normalized and `ResourceHandle` is the canonical core handle wrapper.
 - Resolved: `EngineEvent.timestamp()` is now an explicit stable creation-time contract (no call-time default).
+- Resolved: `EntityId.NONE` sentinel was removed from the core identity contract.
 
 ## Keep / Move / Rename / Remove
 
@@ -34,8 +35,6 @@ DynamisCore is close to a minimal foundation, but it is showing early junk-drawe
   - Completed in this slice by removing direct logging side effects/dependency.
 
 ## Remove / Change Behavior
-- `EntityId.NONE` sentinel:
-  - Prefer `Optional<EntityId>` or explicit nullable contract at call sites.
 - `SystemId.of(String)` hash-based ID:
   - Keep only if collision semantics are explicitly acceptable; otherwise remove from core.
 
@@ -67,6 +66,6 @@ Before broader publication:
 
 ## Suggested Implementation Order
 1. Refactor boundary leaks (`InitContext`, `Disposable`, `resource` package naming cleanup) [completed].
-2. Remove/adjust surprising defaults (`EntityId.NONE`, `SystemId.of(String)`).
+2. Remove/adjust surprising defaults (`SystemId.of(String)`).
 3. Namespace/publishing alignment (`groupId`, package strategy, parent adoption).
 4. Only then cut stable public API milestone.

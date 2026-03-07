@@ -16,6 +16,8 @@ DynamisCore is intentionally small. The inclusion rule is strict: if two or more
 
 **`EntityId`** — a record wrapping a `long`. The universal identifier for anything that exists in the game world. Every component that touches entities uses this type. Equality and hashing are value-based.
 
+Absence of an entity is represented outside `EntityId` (for example, `Optional<EntityId>`), not by a sentinel value.
+
 **`ComponentId`** — identifies a component type within an entity.
 
 **`SystemId`** — identifies a registered subsystem within DynamisWorldEngine.

@@ -6,8 +6,6 @@ package org.dynamis.core.entity;
  * @param id entity identifier
  */
 public record EntityId(long id) implements Comparable<EntityId> {
-  public static final EntityId NONE = EntityId.of(Long.MAX_VALUE);
-
   /**
    * Creates an {@link EntityId} from a numeric identifier.
    *
