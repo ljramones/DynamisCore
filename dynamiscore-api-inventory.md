@@ -35,14 +35,14 @@ Assessment:
 - Boundary hardening applied: `InitContext` no longer carries untyped placeholders.
 
 ### `org.dynamis.core.event`
-- `EngineEvent` (default `priority`, default `timestamp`)
+- `EngineEvent` (default `priority`, explicit `timestamp` contract)
 - `EventListener<T>`
 - `EventPriority`
 - `EventSubscription`
 
 Assessment:
 - Base event contracts belong in core.
-- Risk: `EngineEvent.timestamp()` default is call-time, not creation-time.
+- Timestamp semantics are explicit: event types must provide a stable creation-time timestamp.
 
 ### `org.dynamis.core.config`
 - `DynamisConfig` (+ nested `Builder`)
@@ -86,4 +86,4 @@ Assessment:
 - Weak points:
   - Runtime policy leaking into core (`DynamisInitException`, `DynamisTickException`, `DynamisShutdownException`).
   - Implementation details in core (`ResourceHandle`, JUL-backed logger).
-  - Some defaults are surprising (`timestamp()` semantics, permissive boolean parsing).
+  - Some defaults are surprising (permissive boolean parsing).

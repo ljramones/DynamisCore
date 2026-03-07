@@ -55,6 +55,8 @@ public record TickContext(long tickNumber, double deltaTime, double elapsedTime)
 
 **`EventPriority`** — enum for event dispatch ordering: `CRITICAL`, `HIGH`, `NORMAL`, `LOW`.
 
+**`EngineEvent#timestamp()`** — event types provide a stable timestamp captured at event creation time.
+
 ---
 
 ## Configuration

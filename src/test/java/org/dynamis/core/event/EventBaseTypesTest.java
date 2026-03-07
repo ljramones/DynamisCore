@@ -22,13 +22,16 @@ class EventBaseTypesTest {
 
   @Test
   void engineEventDefaultsToNormalPriority() {
-    EngineEvent event = new EngineEvent() {};
+    EngineEvent event = new TestEvent();
     assertEquals(EventPriority.NORMAL, event.priority());
   }
 
   @Test
-  void engineEventDefaultTimestampIsPositive() {
-    EngineEvent event = new EngineEvent() {};
+  void engineEventTimestampIsStableAndPositive() {
+    EngineEvent event = new TestEvent();
+    long first = event.timestamp();
+    long second = event.timestamp();
+    assertEquals(first, second);
     assertTrue(event.timestamp() > 0L);
   }
 
@@ -37,7 +40,7 @@ class EventBaseTypesTest {
     final int[] counter = new int[] {0};
     EventListener<EngineEvent> listener = event -> counter[0]++;
 
-    listener.onEvent(new EngineEvent() {});
+    listener.onEvent(new TestEvent());
 
     assertEquals(1, counter[0]);
   }
@@ -76,5 +79,14 @@ class EventBaseTypesTest {
     subscription.cancel();
 
     assertEquals(1, counter[0]);
+  }
+
+  private static final class TestEvent implements EngineEvent {
+    private final long timestamp = System.nanoTime();
+
+    @Override
+    public long timestamp() {
+      return timestamp;
+    }
   }
 }

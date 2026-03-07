@@ -42,7 +42,7 @@ Single-module Maven project, package root: `org.dynamis.core`.
 - `SystemId`: positive long wrapper for subsystem identity, including name-hash factory.
 
 ### `org.dynamis.core.event`
-- `EngineEvent`: base marker interface for engine events with default priority/timestamp behavior.
+- `EngineEvent`: base marker interface for engine events with default priority and explicit creation-time timestamp contract.
 - `EventPriority`: dispatch priority enum with explicit numeric levels.
 - `EventListener`: functional interface for typed event consumption with listener priority.
 - `EventSubscription`: immutable subscription handle with cancellation callback.

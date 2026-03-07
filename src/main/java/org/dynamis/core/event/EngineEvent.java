@@ -17,13 +17,9 @@ public interface EngineEvent {
   }
 
   /**
-   * Returns an event timestamp in nanoseconds.
-   *
-   * <p>Default behavior is call-time, not creation-time, unless overridden by event types.
+   * Returns the event timestamp in nanoseconds captured at event creation time.
    *
    * @return timestamp in nanoseconds
    */
-  default long timestamp() {
-    return System.nanoTime();
-  }
+  long timestamp();
 }

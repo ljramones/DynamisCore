@@ -62,7 +62,6 @@ DynamisCore is healthy if all are true:
   - Legacy resource package naming was normalized to `resource`, and `ResourceHandle` is now the core handle wrapper type.
   - Compile dependency footprint remains effectively zero external dependencies.
 - Next cleanup candidates:
-  - `EngineEvent.timestamp()` semantics.
   - permissive config boolean parsing behavior.
   - `EntityId.NONE` sentinel policy.
   - `SystemId.of(String)` collision/policy semantics.

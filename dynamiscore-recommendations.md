@@ -7,6 +7,7 @@ DynamisCore is close to a minimal foundation, but it is showing early junk-drawe
 - Resolved: `InitContext` no longer exposes untyped `Object` placeholders.
 - Resolved: `Disposable` no longer depends on logging (`DynamisLogger` import removed).
 - Resolved: resource package naming was normalized and `ResourceHandle` is the canonical core handle wrapper.
+- Resolved: `EngineEvent.timestamp()` is now an explicit stable creation-time contract (no call-time default).
 
 ## Keep / Move / Rename / Remove
 
@@ -33,8 +34,6 @@ DynamisCore is close to a minimal foundation, but it is showing early junk-drawe
   - Completed in this slice by removing direct logging side effects/dependency.
 
 ## Remove / Change Behavior
-- `EngineEvent.timestamp()` default method:
-  - Remove default or document as non-stable call-time value and discourage repeated calls.
 - `EntityId.NONE` sentinel:
   - Prefer `Optional<EntityId>` or explicit nullable contract at call sites.
 - `SystemId.of(String)` hash-based ID:
@@ -44,7 +43,6 @@ DynamisCore is close to a minimal foundation, but it is showing early junk-drawe
 
 High-risk pervasive patterns:
 - `LogRecord` copies `Throwable` on construction and on accessor (`cause()`): hidden allocation and loss of throwable type/cause chain fidelity.
-- `EngineEvent.timestamp()` calls `System.nanoTime()` each invocation: cheap but semantically unstable and encourages repeated time reads.
 
 Moderate risks:
 - `TickContext` with `double` time fields can accumulate precision drift in long sessions.
@@ -69,6 +67,6 @@ Before broader publication:
 
 ## Suggested Implementation Order
 1. Refactor boundary leaks (`InitContext`, `Disposable`, `resource` package naming cleanup) [completed].
-2. Remove/adjust surprising defaults (`EngineEvent.timestamp`, `EntityId.NONE`, `SystemId.of(String)`).
+2. Remove/adjust surprising defaults (`EntityId.NONE`, `SystemId.of(String)`).
 3. Namespace/publishing alignment (`groupId`, package strategy, parent adoption).
 4. Only then cut stable public API milestone.
