@@ -13,3 +13,8 @@ New root: `org.dynamisengine.core`
 ## Out Of Scope
 - behavioral changes
 - API redesign
+
+## Validation
+- `mvn -q test` passed.
+- `mvn -q -DskipTests package` passed.
+- `rg "org\.dynamis\.core"` now matches only this plan document's historical "Old root" line.
