@@ -4,4 +4,9 @@
     <Class name="org.dynamisengine.core.resource.ResourceHandle"/>
     <Bug pattern="CT_CONSTRUCTOR_THROW"/>
   </Match>
+  <Match>
+    <Class name="org.dynamisengine.core.resource.Disposable"/>
+    <Method name="disposeQuietly"/>
+    <Bug pattern="DE_MIGHT_IGNORE"/>
+  </Match>
 </FindBugsFilter>
