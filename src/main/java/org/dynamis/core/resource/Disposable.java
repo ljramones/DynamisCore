@@ -1,4 +1,4 @@
-package org.dynamis.core.native_;
+package org.dynamis.core.resource;
 
 /**
  * Contract for resources that require explicit cleanup.

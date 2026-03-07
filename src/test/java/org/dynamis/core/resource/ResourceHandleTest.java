@@ -1,4 +1,4 @@
-package org.dynamis.core.native_;
+package org.dynamis.core.resource;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
-class NativeResourceTest {
+class ResourceHandleTest {
   @Test
   void disposeQuietlySwallowsExceptions() {
     Disposable disposable =
@@ -30,26 +30,26 @@ class NativeResourceTest {
   }
 
   @Test
-  void nativeResourceRejectsZeroHandle() {
+  void resourceHandleRejectsZeroHandle() {
     IllegalArgumentException exception =
-        assertThrows(IllegalArgumentException.class, () -> new TestNativeResource(0L));
-    assertEquals("Native handle must be non-zero", exception.getMessage());
+        assertThrows(IllegalArgumentException.class, () -> new TestResourceHandle(0L));
+    assertEquals("Resource handle must be non-zero", exception.getMessage());
   }
 
   @Test
-  void nativeHandleThrowsAfterDispose() {
-    TestNativeResource resource = new TestNativeResource(7L);
+  void resourceHandleThrowsAfterDispose() {
+    TestResourceHandle resource = new TestResourceHandle(7L);
 
     resource.dispose();
 
     IllegalStateException exception =
-        assertThrows(IllegalStateException.class, resource::nativeHandle);
-    assertEquals("NativeResource has been disposed", exception.getMessage());
+        assertThrows(IllegalStateException.class, resource::resourceHandle);
+    assertEquals("ResourceHandle has been disposed", exception.getMessage());
   }
 
   @Test
-  void nativeResourceValidityTracksDisposal() {
-    TestNativeResource resource = new TestNativeResource(5L);
+  void resourceHandleValidityTracksDisposal() {
+    TestResourceHandle resource = new TestResourceHandle(5L);
 
     assertTrue(resource.isValid());
 
@@ -59,8 +59,8 @@ class NativeResourceTest {
   }
 
   @Test
-  void nativeResourceDisposeCallsReleaseExactlyOnce() {
-    TestNativeResource resource = new TestNativeResource(11L);
+  void resourceHandleDisposeCallsReleaseExactlyOnce() {
+    TestResourceHandle resource = new TestResourceHandle(11L);
 
     resource.dispose();
 
@@ -68,8 +68,8 @@ class NativeResourceTest {
   }
 
   @Test
-  void nativeResourceDisposeIsIdempotent() {
-    TestNativeResource resource = new TestNativeResource(12L);
+  void resourceHandleDisposeIsIdempotent() {
+    TestResourceHandle resource = new TestResourceHandle(12L);
 
     resource.dispose();
     resource.dispose();
@@ -97,8 +97,8 @@ class NativeResourceTest {
   }
 
   @Test
-  void nativeResourceConcurrentDisposeCallsReleaseOnce() throws InterruptedException {
-    TestNativeResource resource = new TestNativeResource(21L);
+  void resourceHandleConcurrentDisposeCallsReleaseOnce() throws InterruptedException {
+    TestResourceHandle resource = new TestResourceHandle(21L);
 
     runConcurrentDispose(resource::dispose);
 
@@ -148,15 +148,15 @@ class NativeResourceTest {
     void run();
   }
 
-  private static final class TestNativeResource extends NativeResource {
+  private static final class TestResourceHandle extends ResourceHandle {
     private final AtomicInteger releaseCount = new AtomicInteger(0);
 
-    private TestNativeResource(long nativeHandle) {
-      super(nativeHandle);
+    private TestResourceHandle(long resourceHandle) {
+      super(resourceHandle);
     }
 
     @Override
-    protected void releaseNativeHandle(long handle) {
+    protected void releaseResourceHandle(long handle) {
       releaseCount.incrementAndGet();
     }
   }

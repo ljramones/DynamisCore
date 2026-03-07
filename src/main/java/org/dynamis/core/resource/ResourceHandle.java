@@ -1,37 +1,37 @@
-package org.dynamis.core.native_;
+package org.dynamis.core.resource;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Base type for JNI-backed resources that own a native handle.
+ * Base type for externally-backed resources that own a resource handle.
  */
-public abstract class NativeResource implements Disposable {
-  private final long nativeHandle;
+public abstract class ResourceHandle implements Disposable {
+  private final long resourceHandle;
   private final AtomicBoolean disposed = new AtomicBoolean(false);
   private final AtomicBoolean disposing = new AtomicBoolean(false);
 
   /**
-   * Creates a native resource wrapper.
+   * Creates a resource handle wrapper.
    *
-   * @param nativeHandle non-zero native handle
+   * @param resourceHandle non-zero resource handle
    */
-  protected NativeResource(long nativeHandle) {
-    if (nativeHandle == 0L) {
-      throw new IllegalArgumentException("Native handle must be non-zero");
+  protected ResourceHandle(long resourceHandle) {
+    if (resourceHandle == 0L) {
+      throw new IllegalArgumentException("Resource handle must be non-zero");
     }
-    this.nativeHandle = nativeHandle;
+    this.resourceHandle = resourceHandle;
   }
 
   /**
-   * Returns the native handle while valid.
+   * Returns the resource handle while valid.
    *
-   * @return native handle
+   * @return resource handle
    */
-  public long nativeHandle() {
+  public long resourceHandle() {
     if (isDisposed()) {
-      throw new IllegalStateException("NativeResource has been disposed");
+      throw new IllegalStateException("ResourceHandle has been disposed");
     }
-    return nativeHandle;
+    return resourceHandle;
   }
 
   /**
@@ -44,11 +44,11 @@ public abstract class NativeResource implements Disposable {
   }
 
   /**
-   * Releases the wrapped native handle.
+   * Releases the wrapped resource handle.
    *
-   * @param handle native handle value
+   * @param handle resource handle value
    */
-  protected abstract void releaseNativeHandle(long handle);
+  protected abstract void releaseResourceHandle(long handle);
 
   @Override
   public void dispose() {
@@ -66,7 +66,7 @@ public abstract class NativeResource implements Disposable {
       if (disposed.get()) {
         return;
       }
-      releaseNativeHandle(nativeHandle);
+      releaseResourceHandle(resourceHandle);
       disposed.set(true);
     } finally {
       disposing.set(false);

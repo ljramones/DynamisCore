@@ -59,9 +59,9 @@ DynamisCore is healthy if all are true:
   - `InitContext` is now config-only.
   - Untyped provider placeholders were removed.
   - `Disposable` no longer depends on logging and remains policy-free.
+  - Legacy resource package naming was normalized to `resource`, and `ResourceHandle` is now the core handle wrapper type.
   - Compile dependency footprint remains effectively zero external dependencies.
 - Next cleanup candidates:
-  - `native_` -> `resource` package rename.
   - `EngineEvent.timestamp()` semantics.
   - permissive config boolean parsing behavior.
   - `EntityId.NONE` sentinel policy.

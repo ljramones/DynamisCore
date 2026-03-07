@@ -1,9 +1,9 @@
-package org.dynamis.core.native_;
+package org.dynamis.core.resource;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Base type for non-native resources requiring dispose-once semantics.
+ * Base type for resources requiring dispose-once semantics.
  */
 public abstract class AbstractDisposable implements Disposable {
   private final AtomicBoolean disposed = new AtomicBoolean(false);

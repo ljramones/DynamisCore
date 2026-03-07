@@ -19,7 +19,7 @@ Observed internal imports:
 
 Interpretation:
 - Most packages are cleanly independent.
-- The previous `native_ -> logging` edge has been removed by boundary hardening.
+- The previous resource/logging coupling has been removed by boundary hardening.
 
 ## Dependency Hygiene Findings
 
@@ -30,7 +30,7 @@ Interpretation:
 
 ### Risks
 - `DynamisLogger` is tied to JUL internals; this is still JDK-only but not backend-neutral.
-- `native_` package naming (`native_`) is awkward for long-term API polish; consider `resource` rename in next slice.
+- Resource contracts still include helper implementation types (`ResourceHandle`, `AbstractDisposable`) that may be too heavy for strict core.
 
 ## Namespace and Publishing Readiness
 

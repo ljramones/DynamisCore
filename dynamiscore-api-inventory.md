@@ -7,7 +7,7 @@
 - `exception`: 4 types
 - `lifecycle`: 4 types
 - `logging`: 3 types
-- `native_`: 3 types
+- `resource`: 3 types
 - `version`: 3 types
 - root package: `package-info`
 
@@ -62,15 +62,16 @@ Assessment:
 - Logging abstraction can belong in core if it remains backend-agnostic.
 - Risk: hard dependency on JUL behavior in `DynamisLogger`; `LogRecord` clones `Throwable` on construction/access.
 
-### `org.dynamis.core.native_`
+### `org.dynamis.core.resource`
 - `Disposable` (includes `disposeQuietly`)
 - `AbstractDisposable`
-- `NativeResource`
+- `ResourceHandle`
 
 Assessment:
 - Cleanup contract belongs in core.
 - Boundary hardening applied: `Disposable` no longer depends on `logging`.
-- `NativeResource` and `AbstractDisposable` may be too implementation-heavy for strict core.
+- Rename slice complete: package naming is now `resource`.
+- `ResourceHandle` and `AbstractDisposable` may be too implementation-heavy for strict core.
 
 ### `org.dynamis.core.version`
 - `Version`
@@ -84,5 +85,5 @@ Assessment:
 - Strengths: mostly small records/interfaces, clear naming, no external compile dependencies.
 - Weak points:
   - Runtime policy leaking into core (`DynamisInitException`, `DynamisTickException`, `DynamisShutdownException`).
-  - Implementation details in core (`NativeResource`, JUL-backed logger).
+  - Implementation details in core (`ResourceHandle`, JUL-backed logger).
   - Some defaults are surprising (`timestamp()` semantics, permissive boolean parsing).

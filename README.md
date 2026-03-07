@@ -1,6 +1,6 @@
 # DynamisCore
 
-The shared foundational layer for the Dynamis game engine ecosystem. DynamisCore owns the types, interfaces, and contracts that every other Dynamis component depends on — entity identity, subsystem lifecycle, tick context, event base types, logging abstraction, configuration, and native resource management.
+The shared foundational layer for the Dynamis game engine ecosystem. DynamisCore owns the types, interfaces, and contracts that every other Dynamis component depends on — entity identity, subsystem lifecycle, tick context, event base types, logging abstraction, configuration, and resource management.
 
 DynamisCore has zero dependencies. It is the one component every other Dynamis component takes.
 
@@ -87,11 +87,11 @@ public class DynamisException extends RuntimeException {
 
 ---
 
-## Native Resource Management
+## Resource Management
 
-For components that wrap JNI handles — Jolt Physics rigid bodies, Vulkan handles, OpenAL buffers — DynamisCore provides explicit lifecycle contracts. Pure Java components ignore these entirely.
+For components that wrap external handles — Jolt Physics rigid bodies, Vulkan handles, OpenAL buffers — DynamisCore provides explicit lifecycle contracts. Pure Java components ignore these entirely.
 
-**`Disposable`** — interface for anything that holds native or GPU resources requiring explicit cleanup. Implemented by DynamisPhysics, DynamisLightEngine, DynamisAudio, and any other component wrapping native memory.
+**`Disposable`** — interface for anything that holds external or GPU resources requiring explicit cleanup. Implemented by DynamisPhysics, DynamisLightEngine, DynamisAudio, and any other component wrapping external memory.
 
 ```java
 public interface Disposable {
@@ -100,7 +100,7 @@ public interface Disposable {
 }
 ```
 
-**`NativeResource`** — base for objects wrapping JNI handles. Extends `Disposable`, adds `isValid()` and `nativeHandle()`. Makes JNI ownership explicit and auditable — you always know what holds native memory.
+**`ResourceHandle`** — base for objects wrapping external handles. Extends `Disposable`, adds `isValid()` and `resourceHandle()`. Makes ownership explicit and auditable — you always know what holds external memory.
 
 ---
 

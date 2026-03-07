@@ -11,7 +11,7 @@ DynamisCore is intentionally small (target: ~20-30 classes/interfaces), dependen
 - configuration contracts
 - logging abstraction
 - shared exception base
-- explicit native resource lifecycle contracts
+- explicit resource lifecycle contracts
 - version compatibility model
 
 ## Out of Scope
@@ -27,8 +27,7 @@ Single-module Maven project, package root: `org.dynamis.core`.
 ## Known Caveats
 - `SystemId.of(String)` derives IDs from `name.hashCode()`; IDs are deterministic but not guaranteed unique because hash collisions can occur.
 - Java does not allow `sealed` types with an empty `permits` list, and sealed hierarchies would also prevent event subtypes in other components/packages. `EngineEvent` is intentionally an open interface until concrete cross-component event ownership is finalized.
-- Checkstyle suppression in `checkstyle-suppressions.xml` allows `org.dynamis.core.native_` package naming; trailing underscore is intentional because `native` is a Java keyword.
-- SpotBugs exclusion in `spotbugs-exclude.xml` suppresses `CT_CONSTRUCTOR_THROW` for `NativeResource`; constructor validation for non-zero handles is required by contract.
+- SpotBugs exclusion in `spotbugs-exclude.xml` suppresses `CT_CONSTRUCTOR_THROW` for `ResourceHandle`; constructor validation for non-zero handles is required by contract.
 
 ## Class Inventory
 
@@ -57,7 +56,7 @@ Single-module Maven project, package root: `org.dynamis.core`.
 ### `org.dynamis.core.lifecycle`
 - `DynamisSubsystem`: core lifecycle contract (`initialize`, `tick`, `shutdown`) for subsystems.
 - `TickContext`: validated per-tick timing context passed to subsystems.
-- `InitContext`: validated initialization context carrying config and placeholder providers.
+- `InitContext`: validated initialization context carrying config.
 - `SubsystemState`: lifecycle state enum for subsystem state tracking.
 
 ### `org.dynamis.core.logging`
@@ -65,10 +64,10 @@ Single-module Maven project, package root: `org.dynamis.core`.
 - `DynamisLogger`: JUL-backed logging facade with core engine-level log API.
 - `LogRecord`: immutable structured log entry for capture/diagnostic workflows.
 
-### `org.dynamis.core.native_`
+### `org.dynamis.core.resource`
 - `Disposable`: idempotent cleanup contract with quiet-dispose helper.
 - `AbstractDisposable`: atomic dispose-once base class for Java-managed resources.
-- `NativeResource`: atomic dispose-once base class for JNI handle-backed resources.
+- `ResourceHandle`: atomic dispose-once base class for resource-handle-backed resources.
 
 ### `org.dynamis.core.version`
 - `Version`: semantic version value type with parsing, comparison, and compatibility checks.

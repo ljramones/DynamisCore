@@ -6,6 +6,7 @@ DynamisCore is close to a minimal foundation, but it is showing early junk-drawe
 ## Status After Boundary-Hardening Slice
 - Resolved: `InitContext` no longer exposes untyped `Object` placeholders.
 - Resolved: `Disposable` no longer depends on logging (`DynamisLogger` import removed).
+- Resolved: resource package naming was normalized and `ResourceHandle` is the canonical core handle wrapper.
 
 ## Keep / Move / Rename / Remove
 
@@ -20,11 +21,12 @@ DynamisCore is close to a minimal foundation, but it is showing early junk-drawe
 ## Move (or narrow)
 - `DynamisInitException`, `DynamisTickException`, `DynamisShutdownException`
   - Reason: these encode engine runtime policy; better in runtime/orchestrator module.
-- `NativeResource`, `AbstractDisposable`
+- `ResourceHandle`, `AbstractDisposable`
   - Reason: these are implementation helpers, not minimal shared contracts.
 
 ## Rename / Refactor
-- `native_` package -> `resource` (or `lifecycle.resource`)
+- `resource` package rename:
+  - Completed in this slice.
 - `InitContext`:
   - Completed in this slice by removing untyped placeholder fields.
 - `Disposable.disposeQuietly()`:
@@ -66,7 +68,7 @@ Before broader publication:
 4. Run `mvn clean verify` after refactor to baseline style + bug checks.
 
 ## Suggested Implementation Order
-1. Refactor boundary leaks (`InitContext`, `Disposable`, `native_` package).
+1. Refactor boundary leaks (`InitContext`, `Disposable`, `resource` package naming cleanup) [completed].
 2. Remove/adjust surprising defaults (`EngineEvent.timestamp`, `EntityId.NONE`, `SystemId.of(String)`).
 3. Namespace/publishing alignment (`groupId`, package strategy, parent adoption).
 4. Only then cut stable public API milestone.
